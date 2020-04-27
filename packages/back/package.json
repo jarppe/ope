@@ -1,0 +1,24 @@
+{
+  "name": "@ope/back",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@ope/common": "1.0.0",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^8.0.8"
+  },
+  "scripts": {
+    "start": "ts-node-dev --respawn index.ts"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^13.13.4",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  }
+}
