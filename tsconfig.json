@@ -9,6 +9,11 @@
         "./common/index.ts"
       ]
     },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

@@ -1,0 +1,93 @@
+---
+version: '2.4'
+
+
+services:
+
+  db:
+    image: postgres:12-alpine
+    init: true
+    restart: always
+    networks:
+      - ope
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ope_db_data:/var/lib/postgresql/data
+      - ~/.psqlrc:/root/.psqlrc:ro
+
+
+  migrate:
+    image: flyway/flyway:6-alpine
+    command: [migrate]
+    restart: on-failure
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://db:5432/$POSTGRES_DB
+      - FLYWAY_USER=$POSTGRES_USER
+      - FLYWAY_PASSWORD=$POSTGRES_PASSWORD
+    volumes:
+      - ./db/conf:/flyway/conf
+      - ./db/sql:/flyway/sql
+    networks:
+      - ope
+    depends_on:
+      - db
+
+
+  proxy:
+    image: nginx:1.17-alpine
+    restart: on-failure
+    volumes:
+      - ./proxy/nginx.dev.conf:/etc/nginx/nginx.conf
+    networks:
+      - ope
+    ports:
+      - 9000:8080
+
+
+  back:
+    image: ope-dev:latest
+    command: ["yarn", "workspace", "@ope/back", "run", "start"]
+    init: true
+    restart: on-failure
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - ALLOWED_ORIGINS=localhost
+    volumes:
+      - .:/app:cached
+    networks:
+      - ope
+    depends_on:
+      - db
+
+
+  front:
+    image: ope-dev:latest
+    command: ["yarn", "workspace", "@ope/front", "run", "start"]
+    init: true
+    stdin_open: true  # see https://github.com/facebook/create-react-app/issues/8688
+    restart: on-failure
+    volumes:
+      - .:/app:cached
+    networks:
+      - ope
+    depends_on:
+      - back
+
+
+networks:
+  ope:
+    name: ope
+
+
+volumes:
+  ope_db_data:
+    name: ope_db_data
+  yarn_cache:
+    name: ope_yarn_cache

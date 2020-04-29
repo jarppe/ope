@@ -1,0 +1,23 @@
+FROM node:13-buster-slim
+WORKDIR /app
+
+
+RUN apt update && apt install -y \
+    net-tools          \
+    inetutils-ping     \
+    inetutils-telnet   \
+    tcptraceroute      \
+    bc                 \
+    curl               \
+    wget               \
+    socat              \
+    httpie             \
+    ctop               \
+    redis              \
+    postgresql-client
+
+
+COPY ./.bashrc /root/.bashrc
+
+
+CMD [ "bash" ]

@@ -11,7 +11,7 @@ const app = new Koa()
 
 
 export const start = () => {
-  const host = process.env.HOST ?? "localhost"
+  const host = process.env.HOST ?? "0.0.0.0"
   const port = Number.parseInt(process.env.PORT ?? "4000")
   app.listen(port, host, () => console.log(`Server running on ${ host }:${ port }`))
 }
