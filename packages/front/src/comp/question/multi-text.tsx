@@ -4,11 +4,9 @@ import { MultiTextQuestion } from "@ope/common"
 
 const Answer = ({ answer, setAnswer, focus }: { answer: string, setAnswer: (v: string) => void, focus: boolean }) => {
   return (
-      <div>
-        <input value={ answer ?? "" }
-               onChange={ e => setAnswer(e.target.value) }
-               autoFocus={ focus }/>
-      </div>
+      <input value={ answer ?? "" }
+             onChange={ e => setAnswer(e.target.value) }
+             autoFocus={ focus }/>
   )
 }
 
@@ -43,18 +41,23 @@ export const MultiText = ({ question, done }: { question: MultiTextQuestion, don
   }
 
   return (
-      <div>
-        <form onSubmit={ go }>
-          {
-            answers.map((a, i) => <Answer key={ i }
-                                          answer={ a }
-                                          setAnswer={ setAnswer(i) }
-                                          focus={ i === 0 }/>)
-          }
-          <button onClick={ go } disabled={ !valid }>
-            Valmis
-          </button>
+      <div className="page test multi-text">
+        <form className="pure-form"
+              onSubmit={ go }>
+          <fieldset>
+            {
+              answers.map((a, i) => <Answer key={ i }
+                                            answer={ a }
+                                            setAnswer={ setAnswer(i) }
+                                            focus={ i === 0 }/>)
+            }
+          </fieldset>
         </form>
+        <button className="pure-button pure-button-primary"
+                onClick={ go }
+                disabled={ !valid }>
+          Jatka
+        </button>
       </div>
   )
 }

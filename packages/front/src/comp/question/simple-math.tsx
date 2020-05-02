@@ -15,16 +15,24 @@ export const SimpleMath = ({ question, done }: { question: SimpleMathQuestion, d
   }
 
   return (
-      <div>
-        <form onSubmit={ go }>
-          <span>{ a }</span>
-          <span>{ op }</span>
-          <span>{ b }</span>
-          <span>=</span>
-          <input value={ answer }
-                 onChange={ e => setAnswer(e.target.value) }
-                 autoFocus={ true }/>
+      <div className="page test simple-math">
+        <form className="pure-form"
+              onSubmit={ go }>
+          <fieldset>
+            <span>{ a }</span>
+            <span>{ op }</span>
+            <span>{ b }</span>
+            <span>=</span>
+            <input value={ answer }
+                   onChange={ e => setAnswer(e.target.value) }
+                   autoFocus={ true }/>
+          </fieldset>
         </form>
+        <button className="pure-button pure-button-primary"
+                disabled={ !valid }
+                onClick={ go }>
+          Jatka
+        </button>
       </div>
   )
 }

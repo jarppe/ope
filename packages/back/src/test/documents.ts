@@ -1,6 +1,6 @@
 import * as createError from "http-errors"
-import { AnswerResponse, Question } from "@ope/common"
-import { ExamDocument, TestDocument, AnswerData } from "../types"
+import { Question } from "@ope/common"
+import { TestDocument, AnswerData } from "../types"
 import { generateKey } from "../id"
 import { findExam } from "../exam/documents"
 import { testsCollection } from "../db"

@@ -34,8 +34,9 @@ export const QuestionView = ({ question, done }: QuestionProps) => {
 
   return (
       <div className="page test question">
-        <div>
-          { name } ({ index + 1 } / { total })
+        <div className="test-name">
+          <span>{ name }</span>
+          <span className="progress">({ index + 1 } / { total })</span>
         </div>
         { c }
       </div>

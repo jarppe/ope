@@ -15,14 +15,22 @@ export const FillTemplate = ({ question, done }: { question: FillTemplateQuestio
   }
 
   return (
-      <div>
-        <form onSubmit={ go }>
-          <span>{ pre }</span>
-          <input value={ answer }
-                 onChange={ e => setAnswer(e.target.value) }
-                 autoFocus={ true }/>
-          <span>{ post }</span>
+      <div className="page test fill-template">
+        <form className="pure-form"
+              onSubmit={ go }>
+          <fieldset>
+            <span>{ pre }</span>
+            <input value={ answer }
+                   onChange={ e => setAnswer(e.target.value) }
+                   autoFocus={ true }/>
+            <span>{ post }</span>
+          </fieldset>
         </form>
+        <button className="pure-button pure-button-primary"
+                disabled={ !valid }
+                onClick={ go }>
+          Jatka
+        </button>
       </div>
   )
 }

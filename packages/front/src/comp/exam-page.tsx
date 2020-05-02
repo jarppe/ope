@@ -53,16 +53,21 @@ export const ExamPage = () => {
   return (
       <div className="page exam">
         <h1>Tervetuloa</h1>
-        <form onSubmit={ go }>
-          <label>Anna nimesi:</label>
-          <input value={ student }
-                 onChange={ e => setStudent(e.target.value) }
-                 placeholder="Oma nimesi"
-                 autoFocus={ true }/>
-          <button disabled={ !valid }
-                  onClick={ go }>
-            Aloita
-          </button>
+        <form className="pure-form pure-form-stacked"
+              onSubmit={ go }>
+          <fieldset>
+            <legend>Aloita harjoitus antamalla nimesi</legend>
+            <input value={ student }
+                   onChange={ e => setStudent(e.target.value) }
+                   placeholder="Oma nimesi"
+                   autoFocus={ true }/>
+            <button className="pure-button pure-button-primary"
+                    type="submit"
+                    disabled={ !valid }
+                    onClick={ go }>
+              Aloita
+            </button>
+          </fieldset>
         </form>
       </div>
   )

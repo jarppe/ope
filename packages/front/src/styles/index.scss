@@ -3,10 +3,40 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  background:  $back1;
+  font-weight: 300;
+  background:  $white;
+  color: $black;
 }
 
 h1, h2, h3 {
   font-weight: 100;
+}
+
+.page {
+  padding: 1rem;
+}
+
+.test-name {
+  font-size: 140%;
+  padding-bottom: 1rem;
+  .progress {
+    padding-left: 1rem;
+    font-size: 80%;
+    color: darkgray;
+  }
+}
+
+.test.simple-math {
+  span {
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+
+.test.multi-text {
+  input {
+    display: block;
+    margin: 0.4rem 0;
+    width: 20rem;
+  }
 }
