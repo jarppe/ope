@@ -1,8 +1,8 @@
 import { Question } from "@ope/common"
 
 
-export interface ExamData {
-  examId: string
+export interface ExamDocument {
+  _id: string
   name: string
   questions: Partial<Question>[]
 }
@@ -16,8 +16,8 @@ export interface AnswerData {
 }
 
 
-export interface Test {
-  testId: string
+export interface TestDocument {
+  _id: string
   examId: string
   student: string | null
   started: number | null

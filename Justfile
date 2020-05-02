@@ -91,4 +91,7 @@ tunnel lport host rport:
 
 # Tunnel DB to local host
 tunnel-db:
-  @just tunnel 5432 db 5432
+  @just tunnel 27017 db 27017
+
+tunnel-express:
+  @just tunnel 8081 mongo_express 8081

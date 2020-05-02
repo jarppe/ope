@@ -43,16 +43,21 @@ export interface SimpleMathQuestion extends QuestionBase {
 }
 
 
+export interface MultiTextQuestion extends QuestionBase {
+  type: "multiText",
+  count: number,
+}
+
 export type Question =
     FillTemplateQuestion |
     DivideBallsQuestion |
-    SimpleMathQuestion
+    SimpleMathQuestion |
+    MultiTextQuestion
 
 
 export const AnswerSchema = yup.object().shape({
-  index: yup.number().required(),
   token: yup.string().nullable(false).required(),
-  answer: yup.string().nullable(false).required(),
+  answer: yup.array(yup.string().nullable(false)).required(),
 })
 
 
@@ -60,7 +65,7 @@ export type Answer = yup.InferType<typeof AnswerSchema>
 
 
 // Validation in two steps because https://github.com/jquense/yup/issues/670
-export const isAnswer = (data: any) => Promise.resolve(data)
+export const toAnswer = (data: any) => Promise.resolve(data)
     .then(data => AnswerSchema.validate(data, { stripUnknown: true, strict: false }))
     .then(data => AnswerSchema.validate(data, { stripUnknown: false, strict: true }))
 

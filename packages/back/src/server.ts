@@ -10,8 +10,10 @@ const app = new Koa()
     .use(router.routes())
 
 
-export const start = () => {
+export const start = (): Promise<[string,number]> => {
   const host = process.env.HOST ?? "0.0.0.0"
-  const port = Number.parseInt(process.env.PORT ?? "4000")
-  app.listen(port, host, () => console.log(`Server running on ${ host }:${ port }`))
+  const port = Number.parseInt(process.env.PORT ?? "4000", 10)
+  return new Promise<[string,number]>(resolve => {
+    app.listen(port, host, () => resolve([host, port]))
+  })
 }

@@ -4,32 +4,28 @@ version: '2.4'
 
 services:
 
+
   db:
-    image: postgres:12-alpine
+    image: mongo:4.2
     init: true
     restart: always
     networks:
       - ope
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
     volumes:
-      - ope_db_data:/var/lib/postgresql/data
-      - ~/.psqlrc:/root/.psqlrc:ro
+      - ope_db_data:/data/db
 
 
-  migrate:
-    image: flyway/flyway:6-alpine
-    command: [migrate]
-    restart: on-failure
+  mongo_express:
+    image: mongo-express
+    restart: always
     environment:
-      - FLYWAY_URL=jdbc:postgresql://db:5432/$POSTGRES_DB
-      - FLYWAY_USER=$POSTGRES_USER
-      - FLYWAY_PASSWORD=$POSTGRES_PASSWORD
-    volumes:
-      - ./db/conf:/flyway/conf
-      - ./db/sql:/flyway/sql
+      - ME_CONFIG_MONGODB_SERVER=$MONGODB_HOST
+      - ME_CONFIG_MONGODB_PORT=$MONGODB_PORT
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
     networks:
       - ope
     depends_on:
@@ -53,11 +49,11 @@ services:
     init: true
     restart: on-failure
     environment:
-      - POSTGRES_HOST
-      - POSTGRES_PORT
-      - POSTGRES_DB
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+      - MONGODB_HOST
+      - MONGODB_PORT
+      - MONGODB_DB
+      - MONGODB_USER
+      - MONGODB_PASSWORD
       - ALLOWED_ORIGINS=localhost
     volumes:
       - .:/app:cached
