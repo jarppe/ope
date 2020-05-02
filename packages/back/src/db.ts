@@ -2,15 +2,11 @@ import { MongoClient, Db, Collection } from "mongodb"
 import { ExamDocument, TestDocument } from "./types"
 
 
-const { MONGODB_USER, MONGODB_PASSWORD, MONGODB_HOST, MONGODB_PORT, MONGODB_DB } = process.env
-const uri = `mongodb://` +
-    `${ encodeURIComponent(MONGODB_USER!) }:${ encodeURIComponent(MONGODB_PASSWORD!) }` +
-    `@` +
-    `${ MONGODB_HOST }:${ MONGODB_PORT }` +
-    `/?authMechanism=DEFAULT`
+const { MONGODB_URI, MONGODB_DB } = process.env
 
 
-export const client = new MongoClient(uri, {
+export const client = new MongoClient(MONGODB_URI!, {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
   w: "majority",
 })
@@ -29,7 +25,7 @@ export const connect = (): Promise<void> => {
         testsCollection = db.collection<TestDocument>("tests")
       })
       .catch(err => {
-        console.error(`can't connect to db at ${ MONGODB_HOST }:${ MONGODB_PORT }`, err)
+        console.error(`can't connect to db`, err)
         throw err
       })
 }

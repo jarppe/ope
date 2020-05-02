@@ -12,8 +12,8 @@ services:
     networks:
       - ope
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_ROOT_USERNAME=ope
+      - MONGO_INITDB_ROOT_PASSWORD=ope
     volumes:
       - ope_db_data:/data/db
 
@@ -22,10 +22,10 @@ services:
     image: mongo-express
     restart: always
     environment:
-      - ME_CONFIG_MONGODB_SERVER=$MONGODB_HOST
-      - ME_CONFIG_MONGODB_PORT=$MONGODB_PORT
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
+      - ME_CONFIG_MONGODB_SERVER=db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=ope
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=ope
     networks:
       - ope
     depends_on:
@@ -49,11 +49,8 @@ services:
     init: true
     restart: on-failure
     environment:
-      - MONGODB_HOST
-      - MONGODB_PORT
+      - MONGODB_URI
       - MONGODB_DB
-      - MONGODB_USER
-      - MONGODB_PASSWORD
       - ALLOWED_ORIGINS=localhost
     volumes:
       - .:/app:cached
