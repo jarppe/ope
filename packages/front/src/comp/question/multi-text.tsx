@@ -41,7 +41,7 @@ export const MultiText = ({ question, done }: { question: MultiTextQuestion, don
   }
 
   return (
-      <div className="page test multi-text">
+      <div className="test multi-text">
         <form className="pure-form"
               onSubmit={ go }>
           <fieldset>

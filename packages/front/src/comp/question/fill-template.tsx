@@ -15,7 +15,7 @@ export const FillTemplate = ({ question, done }: { question: FillTemplateQuestio
   }
 
   return (
-      <div className="page test fill-template">
+      <div className="test fill-template">
         <form className="pure-form"
               onSubmit={ go }>
           <fieldset>

@@ -8,13 +8,21 @@ body {
   color: $black;
 }
 
+
 h1, h2, h3 {
   font-weight: 100;
 }
 
+
 .page {
   padding: 1rem;
 }
+
+
+.page.home {
+
+}
+
 
 .test-name {
   font-size: 140%;
@@ -25,6 +33,7 @@ h1, h2, h3 {
     color: darkgray;
   }
 }
+
 
 .test.simple-math {
   span {

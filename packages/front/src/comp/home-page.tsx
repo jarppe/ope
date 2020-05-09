@@ -18,17 +18,28 @@ export const HomePage = () => {
 
 
   return (
-      <div>
+      <div className="page home">
         <h1>Tervetuloa</h1>
-        <form onSubmit={ go }>
-          <label>Harjoituksen numero:</label>
-          <input value={ examId }
-                 onChange={ e => setExamId(e.target.value) }/>
-          <button disabled={ !valid }
-                  onClick={ go }>
-            Aloita
-          </button>
+        <form className="pure-form"
+              onSubmit={ go }
+              style={ { marginBottom: "1rem" } }>
+          <fieldset>
+            <legend>Anna harjoituksen numero jonka sait opettajaltasi</legend>
+            <label htmlFor="exam-id"
+                   style={ { paddingRight: "0.5rem" } }>
+              Harjoituksen numero:
+            </label>
+            <input id="exam-id"
+                   value={ examId }
+                   onChange={ e => setExamId(e.target.value) }
+                   placeholder="1234-5678-9012"/>
+          </fieldset>
         </form>
+        <button className="pure-button pure-button-primary"
+                disabled={ !valid }
+                onClick={ go }>
+          Aloita
+        </button>
       </div>
   )
 }

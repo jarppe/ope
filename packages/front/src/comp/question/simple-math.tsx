@@ -15,7 +15,7 @@ export const SimpleMath = ({ question, done }: { question: SimpleMathQuestion, d
   }
 
   return (
-      <div className="page test simple-math">
+      <div className="test simple-math">
         <form className="pure-form"
               onSubmit={ go }>
           <fieldset>
